@@ -1,0 +1,7 @@
+{
+  "name": "TugasMobile1",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
