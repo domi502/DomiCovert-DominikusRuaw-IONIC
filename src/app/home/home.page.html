@@ -1,7 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Metric Converter
+      <h5>By: Dominikus Ruaw</h5>
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,12 +10,43 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">Metric Converter</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <ion-item>
+      <ion-label>Dari:</ion-label>
+      <ion-select [(ngModel)]="selectedMetrik" (ionChange)="onChangeMetrik()">
+        <ion-select-option *ngFor="let metrik of metriks" [value]="metrik">{{ metrik }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Satuan Awal:</ion-label>
+      <ion-select [(ngModel)]="satuanAwal" [disabled]="!selectedMetrik">
+        <ion-select-option *ngFor="let satuan of getSatuanAwal()" [value]="satuan">{{ satuan }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Ke:</ion-label>
+      <ion-select [(ngModel)]="satuanAkhir" [disabled]="!selectedMetrik">
+        <ion-select-option *ngFor="let satuan of getSatuanAkhir()" [value]="satuan">{{ satuan }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Nilai Awal:</ion-label>
+      <ion-input type="number" [(ngModel)]="nilaiAwal" (ionInput)="updateHasilKonversi()"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Hasil Konversi:</ion-label>
+      <ion-input type="text" [value]="hasilKonversi" readonly></ion-input>
+      
+    </ion-item>
+
+    <ion-button expand="block" (click)="resetForm()">Reset</ion-button>
   </div>
 </ion-content>
